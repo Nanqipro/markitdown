@@ -132,6 +132,10 @@ def _handle_output(args, result: DocumentConverterResult):
         with open(args.output, "w", encoding="utf-8") as f:
             f.write(result.text_content)
     else:
+        # 确保标准输出使用UTF-8编码
+        import io
+        import sys
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='backslashreplace')
         print(result.text_content)
 
 
